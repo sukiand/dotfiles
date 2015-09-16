@@ -1,4 +1,0 @@
-sudo apt-get install cscope
-after copy bundle to ~.
-    cd~/.vim/bundle/vimproc.vim
-    make
