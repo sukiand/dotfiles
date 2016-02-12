@@ -205,7 +205,7 @@ set showcmd
 " set mouse=a
 
 set undofile
-set undodir=/Users/zzy/.vimundo
+set undodir=/usr/gcy/.vimundo
 
 autocmd BufRead,BufNew *.md setlocal ft=markdown
 
