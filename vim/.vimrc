@@ -40,6 +40,7 @@ Plugin 'osyo-manga/vim-marching'
 Plugin 'scrooloose/syntastic'
 " fuzzy finding
 " Command: :CtrlP
+Plugin 'elzr/vim-json'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'bling/vim-airline'
@@ -103,6 +104,7 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -210,6 +212,14 @@ else
     set background=dark
 endif
 colorscheme solarized
+
+"""""""""""""""""""""
+" Conf for Vim-Json "
+"""""""""""""""""""""
+" let g:vim_json_syntax_conceal = 0
+" let g:indentLine_noConcealCursor="nc"
+autocmd InsertEnter *.json setlocal conceallevel=2 concealcursor=
+autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 
 """""""""""""""""""""""
 " General vim settings "
