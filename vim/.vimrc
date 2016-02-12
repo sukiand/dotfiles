@@ -6,18 +6,44 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" keyword completion system 
+" Key: Tab
 Plugin 'Shougo/neocomplete.vim'
+" comment
+" Key: gcc
 Plugin 'tpope/vim-commentary'
+" The NERD tree allows you to explore your filesystem and to open files and
+" directories.
+" Key: F7
 Plugin 'scrooloose/nerdtree'
+" Show the structure
+" Key: F8
 Plugin 'majutsushi/tagbar'
+" color for parentheses
+" Key: auto
 Plugin 'luochen1990/rainbow'
+" This plugin is used for displaying thin vertical lines at each indentation
+" level for code indented with spaces
+" Key: auto
 Plugin 'Yggdroot/indentLine'
+" syntax and indent plugin for js
+" Key: auto
+Plugin 'pangloss/vim-javascript'
+" all trailing whitespace characters (spaces and tabs) to be highlighted
+" Key: auto
 Plugin 'ntpeters/vim-better-whitespace'
+" Use Clang to complete c++
+" Key: auto
 Plugin 'osyo-manga/vim-marching'
+" Powerful syntax checking 
+" Key: auto
 Plugin 'scrooloose/syntastic'
+" fuzzy finding
+" Command: :CtrlP
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-scripts/mru.vim'
@@ -100,6 +126,11 @@ noremap <F7> <ESC>:NERDTreeToggle<CR>
 """""""""""""""""""
 nnoremap <F8> <ESC>:Tagbar<CR>
 
+""""""""""""""""""""""""""""
+" Conf for vim-javascripts "
+""""""""""""""""""""""""""""
+let g:javascript_enable_domhtmlcss= 0
+
 """""""""""""""""""""""""
 " Conf for vim-marching "
 """""""""""""""""""""""""
@@ -166,6 +197,20 @@ noremap <F9> <ESC>:SyntasticToggleMode<CR>
 let g:syntastic_c_checkers = ['gcc', 'cppcheck']
 let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
 
+"""""""""""""""""""""""""""""""""
+" Conf for vim-colors-solarized "
+"""""""""""""""""""""""""""""""""
+let g:solarized_bold = 0
+let g:solarized_contrast = "low"
+"let g:solarized_termcolors = 256
+
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
+
 """""""""""""""""""""""
 " General vim settings "
 """""""""""""""""""""""
@@ -202,6 +247,11 @@ set laststatus=2
 set vb t_vb=
 set ruler
 set showcmd
+
+" set cursorline
+" set cursorcolumn
+" highlight CurSorLine ctermbg=LightBlue
+" highlight CursorColumn ctermbg=LightBlue
 " set mouse=a
 
 set undofile
