@@ -15,6 +15,7 @@ Plugin 'tpope/vim-commentary'
 " The NERD tree allows you to explore your filesystem and to open files and
 " directories.
 " Key: F7
+" <CR> to open in current window. s to split window and t to a new tab
 Plugin 'scrooloose/nerdtree'
 " Show the structure
 " Key: F8
@@ -49,6 +50,7 @@ Plugin 'editorconfig/editorconfig-vim'
 " Key: <leader>1,<leader>2,..,<C-n> to create,<C-q> to next, or gt to next
 " Command: :tabnew, tabnext
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'jiangmiao/auto-pairs'
@@ -237,19 +239,41 @@ nnoremap <C-f> :CtrlP<CR>
 """"""""""""""""""""""
 " Conf for airline   "
 """"""""""""""""""""""
+let g:airline_powerline_fonts = 1
+
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '>'
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+
+
 inoremap <C-n> <ESC>:w<CR>:tabnew<CR>
-nnoremap <C-n> :tabnew<CR> 
+nnoremap <C-n> :tabnew<CR>
 inoremap <C-q> <ESC>:w<CR>:tabnext<CR>
-nnoremap <C-q> :tabnext<CR> 
+nnoremap <C-q> :tabnext<CR>
+
+" let g:airline_theme='luna'
+let g:airline_theme='wombat'
+" let g:airline_theme='molokai'
+
 
 """""""""""""""""""""
 " Conf for Vim-Json "
 """""""""""""""""""""
-nnoremap <C-m> :MRU<CR>
+nnoremap <C-,> :MRU<CR>
 
 """""""""""""""""""""""
 " General vim settings "
