@@ -1,3 +1,13 @@
-1 ./setup.sh
-2 launch vim and ':PluginInstall'
-3 add the bash to ~/.bashrc
+1 Install vim
+    1.1 update vim in the computer
+    1.2 copy the .vimrc file in ~ folder
+    1.3 launch vim
+    1.4 :PluginInstall
+    1.5 Install Ack in order to supprt ack
+
+2 Change the bash
+    2.1 change to 256 mode
+        export TERM=xterm-256color
+        # [[ -n "$DISPLAY" && "$TERM" = "xterm"  ]] && export TERM=xterm-256color
+    2.2 disable lock screen. <C-s> lock and <C-q> unlock
+        stty -ixon

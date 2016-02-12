@@ -35,22 +35,30 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Use Clang to complete c++
 " Key: auto
 Plugin 'osyo-manga/vim-marching'
-" Powerful syntax checking 
+" Powerful syntax checking
 " Key: auto
 Plugin 'scrooloose/syntastic'
 " fuzzy finding
+" Key: <C-f>
 " Command: :CtrlP
 Plugin 'elzr/vim-json'
 Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
+" status bar and tabline
+" Key: <leader>1,<leader>2,..,<C-n> to create,<C-q> to next, or gt to next
+" Command: :tabnew, tabnext
 Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'jiangmiao/auto-pairs'
+" The most reccent use
+" Key: <C-m>
 Plugin 'vim-scripts/mru.vim'
 
 call vundle#end()
 filetype plugin indent on
+
 
 """"""""""""""""""""""""
 " Conf for neocomplete "
@@ -221,9 +229,33 @@ colorscheme solarized
 autocmd InsertEnter *.json setlocal conceallevel=2 concealcursor=
 autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 
+""""""""""""""""""""""
+" Conf for airline   "
+""""""""""""""""""""""
+nnoremap <C-f> :CtrlP<CR>
+
+""""""""""""""""""""""
+" Conf for airline   "
+""""""""""""""""""""""
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '>'
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+inoremap <C-n> <ESC>:w<CR>:tabnew<CR>
+nnoremap <C-n> :tabnew<CR> 
+inoremap <C-q> <ESC>:w<CR>:tabnext<CR>
+nnoremap <C-q> :tabnext<CR> 
+
+"""""""""""""""""""""
+" Conf for Vim-Json "
+"""""""""""""""""""""
+nnoremap <C-m> :MRU<CR>
+
 """""""""""""""""""""""
 " General vim settings "
 """""""""""""""""""""""
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>i
 
 syntax on
 set scrolloff=4
@@ -258,10 +290,13 @@ set vb t_vb=
 set ruler
 set showcmd
 
-" set cursorline
-" set cursorcolumn
-" highlight CurSorLine ctermbg=LightBlue
-" highlight CursorColumn ctermbg=LightBlue
+if $TERM == "xterm-256color"
+      set t_Co=256
+  endif
+set cursorline
+set cursorcolumn
+hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE guibg=darkred guifg=white
 " set mouse=a
 
 set undofile
