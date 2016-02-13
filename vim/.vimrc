@@ -1,3 +1,7 @@
+"""""""""""""""""""""""""""""""""""""""""""""""
+" support  C++, Javascript, HTML, markdown,
+" javascript, python
+"""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
 
@@ -53,6 +57,8 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'jiangmiao/auto-pairs'
 " The most reccent use
 " Key: <C-m>
@@ -127,6 +133,11 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+"""""""""""""""""""""""
+" Conf for commentary "
+"""""""""""""""""""""""
+autocmd FileType markdown setlocal commentstring=<!--%s-->
 
 """""""""""""""""""""
 " Conf for nerdtree "
@@ -227,7 +238,8 @@ colorscheme solarized
 " Conf for Vim-Json "
 """""""""""""""""""""
 " let g:vim_json_syntax_conceal = 0
-" let g:indentLine_noConcealCursor="nc"
+" let g:indentLine_noConcealCursor=""
+
 autocmd InsertEnter *.json setlocal conceallevel=2 concealcursor=
 autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 
@@ -241,18 +253,18 @@ nnoremap <C-f> :CtrlP<CR>
 """"""""""""""""""""""
 let g:airline_powerline_fonts = 1
 
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
@@ -265,15 +277,26 @@ nnoremap <C-n> :tabnew<CR>
 inoremap <C-q> <ESC>:w<CR>:tabnext<CR>
 nnoremap <C-q> :tabnext<CR>
 
-" let g:airline_theme='luna'
-let g:airline_theme='wombat'
+let g:airline_theme='luna'
+" let g:airline_theme='wombat'
 " let g:airline_theme='molokai'
 
 
 """""""""""""""""""""
 " Conf for Vim-Json "
 """""""""""""""""""""
-nnoremap <C-,> :MRU<CR>
+" nnoremap <C-m> :MRU<CR>
+
+""""""""""""""""""""
+" Conf for markdown"
+""""""""""""""""""""
+let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_level = 6
+autocmd FileType markdown let g:indentLine_conceallevel=1
+
+autocmd InsertEnter *.md setlocal conceallevel=1 concealcursor=
+autocmd InsertLeave *.md setlocal conceallevel=1 concealcursor=inc
 
 """""""""""""""""""""""
 " General vim settings "
