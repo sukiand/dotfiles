@@ -47,6 +47,7 @@ Plugin 'scrooloose/syntastic'
 " Key: <C-f>
 " Command: :CtrlP
 Plugin 'elzr/vim-json'
+Plugin 'mxw/vim-jsx'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
@@ -157,6 +158,7 @@ let g:javascript_enable_domhtmlcss= 0
 """""""""""""""""""""""""
 " Conf for vim-marching "
 """""""""""""""""""""""""
+let g:clang_user_options="-std=c++11"
 let g:marching_clang_command = "/usr/bin/clang"
 let g:marching_include_paths = [
       \ "/usr/include/c++/4.8"
@@ -217,8 +219,13 @@ let g:syntastic_mode_map = { 'mode': 'active',
       \ 'passive_filetypes': ['puppet', 'html'] }
 noremap <F9> <ESC>:SyntasticToggleMode<CR>
 " let g:syntastic_c_config_file = '.syntastic_c_config'
-let g:syntastic_c_checkers = ['gcc', 'cppcheck']
-let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
+" let g:syntastic_c_checkers = ['gcc', 'cppcheck']
+" let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+" let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
+
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_css_checkers = ['csslint']
 
 """""""""""""""""""""""""""""""""
 " Conf for vim-colors-solarized "
@@ -242,6 +249,11 @@ colorscheme solarized
 
 autocmd InsertEnter *.json setlocal conceallevel=2 concealcursor=
 autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
+
+"""""""""""""""""""""
+" Conf for Vim-jsx  "
+"""""""""""""""""""""
+" let g:jsx_ext_required = 0
 
 """"""""""""""""""""""
 " Conf for airline   "

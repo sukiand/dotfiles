@@ -4,6 +4,10 @@
     1.3 launch vim
     1.4 :PluginInstall
     1.5 Install Ack in order to supprt ack
+    1.6 if you want to use check javascript, or css:
+            Install npm first.
+            sudo npm install -g jshint
+            sudo npm install -g csslint
 
 2 Change the bash
     2.1 change to 256 mode
