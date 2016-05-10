@@ -44,7 +44,7 @@ Plugin 'osyo-manga/vim-marching'
 " Key: auto
 Plugin 'scrooloose/syntastic'
 " fuzzy finding
-" Key: <C-f>
+" Key: <C-f> cancelled.
 " Command: :CtrlP
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
@@ -64,6 +64,9 @@ Plugin 'jiangmiao/auto-pairs'
 " The most reccent use
 " Key: <C-m>
 Plugin 'vim-scripts/mru.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 call vundle#end()
 filetype plugin indent on
@@ -208,6 +211,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open=1
+let g:syntastic_cpp_check_header = 1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol = "✗"
@@ -258,7 +262,7 @@ autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 """"""""""""""""""""""
 " Conf for airline   "
 """"""""""""""""""""""
-nnoremap <C-f> :CtrlP<CR>
+" nnoremap <C-f> :CtrlP<CR>
 
 """"""""""""""""""""""
 " Conf for airline   "
@@ -310,6 +314,12 @@ autocmd FileType markdown let g:indentLine_conceallevel=1
 autocmd InsertEnter *.md setlocal conceallevel=1 concealcursor=
 autocmd InsertLeave *.md setlocal conceallevel=1 concealcursor=inc
 
+
+""""""""""""""""""""
+" Conf for tags    "
+""""""""""""""""""""
+set tags+=./tags
+
 """""""""""""""""""""""
 " General vim settings "
 """""""""""""""""""""""
@@ -319,9 +329,11 @@ inoremap <C-s> <ESC>:w<CR>i
 syntax on
 set scrolloff=4
 
+
 set modeline
 set modelines=5
 
+set ignorecase
 set hlsearch
 set smartcase
 set incsearch
