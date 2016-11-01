@@ -9,21 +9,20 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-export TERM=xterm-256color
+export TERM=screen-256color
 
 # #configuration for random animals
 # if [ -x /usr/games/cowsay -a -x /usr/games/fortune ]; then
 # 	fortune | cowsay -f `ls -1 /usr/share/cowsay/cows/ | sort -R | head -1` -n
 # 	fi
 
-# export NISE_HOME=/home/arun/neptune/nise/
 export NISE_HOME=$HOME/git/neptune/nise
-alias nise="cd $NISE_HOME"
+# export NISE_HOME=$HOME/git/rtiBranch/neptune/nise
+alias nise="cd /home/changyungong/git/neptune/nise"
+alias rti="cd /home/changyungong/git/rtiBranch/neptune/nise"
 alias mmmm="make MODE=opt -j 4"
 
-# export NISE_HOME=/home/arun/neptune/nise/ 
-export NISE_NGINX_HOME=$HOME/experiment/nginx/nginx-1.10.1/
-# alias nise_nginx="cd $NISE_NGINX_HOME"
+export NISE_NGINX_HOME=$HOME/experiment/nginx/nginx-1.10.1
 
 #environment variable to install protobuf 2.5.0
 export CPPFLAGS=-fPIC
@@ -77,20 +76,11 @@ cgirun() {
 }
 
 #alias commands for nginx development
-alias w="cd /home/changyungong/experiment/nginx/modules/cpp/"
-alias s="cd /home/changyungong/experiment/nginx/modules/script"
+alias w="cd $NISE_HOME/nginxmod/lsnginxmod"
+alias s="cd $NISE_HOME/tools/scripts/nginx_scripts"
 alias n="cd /home/changyungong/experiment/nginx/nginx-1.10.1"
-export LD_LIBRARY_PATH=/home/changyungong/experiment/nginx/modules/library:/home/changyungong/git/neptune/nise/src/objs.x86_64:$LD_LIBRARY_PATH
-
-# commands to operate nginx
-nginx() {
-    case "$1" in
-        (start) sudo LD_LIBRARY_PATH=/home/changyungong/experiment/nginx/modules/library:/home/changyungong/git/neptune/nise/src/objs.x86_64:$LD_LIBRARY_PATH /usr/local/nginx/sbin/nginx ;;
-        (reload) sudo LD_LIBRARY_PATH=/home/changyungong/experiment/nginx/modules/library:/home/changyungong/git/neptune/nise/src/objs.x86_64:$LD_LIBRARY_PATH /usr/local/nginx/sbin/nginx -s reload ;;
-        (stop) sudo LD_LIBRARY_PATH=/home/changyungong/experiment/nginx/modules/library:/home/changyungong/git/neptune/nise/src/objs.x86_64:$LD_LIBRARY_PATH /usr/local/nginx/sbin/nginx -s stop ;;
-        *)  echo "start reload or stop nginx" ;;
-    esac
-}
+# export LD_LIBRARY_PATH=/home/changyungong/experiment/nginx/modules/library:/home/changyungong/git/neptune/nise/src/objs.x86_64:$LD_LIBRARY_PATH
+export FASTBITLOGFILE=/home/xad/ibis/ibis.txt
 
 #command for changyungong nise home
 alias make_nise="make MODE=opt -j 4"
@@ -126,3 +116,16 @@ alias xad="sudo su - xad"
 # RTags
 # alias rdm=/home/changyungong/git/rtags/build/bin/rdm
 # alias rc=/home/changyungong/git/rtags/build/bin/rc 
+
+function www() {
+    WORK="work"
+
+    tmux has-session -t "$WORK"
+    if [ $? != 0  ]; then
+        tmux new-session -s "$WORK" -n "main" -d
+        tmux new-window -t "${WORK}:2" -n "xad" 
+
+        tmux send-keys -t "${WORK}:2" "xad" C-m
+    fi
+    tmux attach -t $WORK
+}

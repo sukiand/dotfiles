@@ -44,12 +44,12 @@ Plugin 'osyo-manga/vim-marching'
 " Key: auto
 Plugin 'scrooloose/syntastic'
 " fuzzy finding
-" Key: <C-f> cancelled.
+" Key: <C-p> cancelled.
 " Command: :CtrlP
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
 Plugin 'editorconfig/editorconfig-vim'
 " status bar and tabline
 " Key: <leader>1,<leader>2,..,<C-n> to create,<C-q> to next, or gt to next
@@ -67,6 +67,11 @@ Plugin 'vim-scripts/mru.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'lyuts/vim-rtags'
+" :A switches to the header file corresponding to the current file being
+Plugin 'a.vim'
+" Simple tmux statusline generator with support for powerline symbols and vim/airline/lightline statusline integration
+Plugin 'edkolev/tmuxline.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -139,9 +144,31 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 """""""""""""""""""""""
+" Conf for rtags      "
+"""""""""""""""""""""""
+" let g:rtagsUseDefaultMappings = 0
+let g:rtagsUseLocationList = 0
+let g:rtagsJumpStackMaxSize = 100
+
+function! SetupNeocomleteForCppWithRtags()
+    " Enable heavy omni completion.
+    setlocal omnifunc=RtagsCompleteFunc
+
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+        let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    let l:cpp_patterns='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    let g:neocomplete#sources#omni#input_patterns.cpp = l:cpp_patterns
+    set completeopt+=longest,menuone
+endfunction
+
+autocmd FileType cpp,c call SetupNeocomleteForCppWithRtags()
+
+"""""""""""""""""""""""
 " Conf for commentary "
 """""""""""""""""""""""
 autocmd FileType markdown setlocal commentstring=<!--%s-->
+autocmd FileType cpp setlocal commentstring=//\ %s
 
 """""""""""""""""""""
 " Conf for nerdtree "
@@ -170,8 +197,8 @@ let g:marching_enable_neocomplete = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+" let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
 
@@ -218,15 +245,15 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
-let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['c', 'cpp'],
+let g:syntastic_mode_map = { 'mode': 'passive',
+      \ 'active_filetypes': [],
       \ 'passive_filetypes': ['puppet', 'html'] }
 noremap <F9> <ESC>:SyntasticToggleMode<CR>
 " let g:syntastic_c_config_file = '.syntastic_c_config'
 " let g:syntastic_c_checkers = ['gcc', 'cppcheck']
+" let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
 " let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11'
-" let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
 
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_css_checkers = ['csslint']
@@ -288,10 +315,10 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 
 
-inoremap <C-n> <ESC>:w<CR>:tabnew<CR>
-nnoremap <C-n> :tabnew<CR>
-inoremap <C-q> <ESC>:w<CR>:tabnext<CR>
-nnoremap <C-q> :tabnext<CR>
+" inoremap <C-n> <ESC>:w<CR>:tabnew<CR>
+" nnoremap <C-n> :tabnew<CR>
+inoremap <C-n> <ESC>:w<CR>:tabnext<CR>
+nnoremap <C-n> :tabnext<CR>
 
 let g:airline_theme='luna'
 " let g:airline_theme='wombat'
@@ -323,8 +350,8 @@ set tags+=./tags
 """""""""""""""""""""""
 " General vim settings "
 """""""""""""""""""""""
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>i
+" nnoremap <C-s> :w<CR>
+" inoremap <C-s> <ESC>:w<CR>i
 
 syntax on
 set scrolloff=4
@@ -360,10 +387,10 @@ set laststatus=2
 set vb t_vb=
 set ruler
 set showcmd
-
-if $TERM == "xterm-256color"
-      set t_Co=256
-  endif
+set t_Co=256
+" if $TERM == "xterm-256color"
+"     set t_Co=256
+" endif
 set cursorline
 set cursorcolumn
 hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE guibg=darkred guifg=white
