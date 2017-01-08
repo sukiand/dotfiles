@@ -1,0 +1,2 @@
+install  Plugin 'edkolev/tmuxline.vim' in vim
+then will generate tmuxline conf audtomatically

@@ -10,7 +10,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-" keyword completion system 
+" keyword completion system
 " Key: Tab
 Plugin 'Shougo/neocomplete.vim'
 " comment
@@ -72,6 +72,7 @@ Plugin 'lyuts/vim-rtags'
 Plugin 'a.vim'
 " Simple tmux statusline generator with support for powerline symbols and vim/airline/lightline statusline integration
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on
@@ -263,7 +264,7 @@ let g:syntastic_css_checkers = ['csslint']
 """""""""""""""""""""""""""""""""
 let g:solarized_bold = 0
 let g:solarized_contrast = "low"
-"let g:solarized_termcolors = 256
+" let g:solarized_termcolors = 256
 
 if has('gui_running')
     set background=light
@@ -323,7 +324,14 @@ nnoremap <C-n> :tabnext<CR>
 let g:airline_theme='luna'
 " let g:airline_theme='wombat'
 " let g:airline_theme='molokai'
+" let g:airline_theme='papercolor'
 
+" let g:airline#extensions#tmuxline#enabled = 0
+" let airline#extensions#tmuxline#color_template = 'normal'
+" let airline#extensions#tmuxline#color_template = 'insert'
+let airline#extensions#tmuxline#snapshot_file = "~/.tmuxline.conf"
+
+let g:airline#extensions#branch#enabled = 1
 
 """""""""""""""""""""
 " Conf for Vim-Json "

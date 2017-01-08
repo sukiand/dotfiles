@@ -1,4 +1,4 @@
-1 Install vim
+1 Install vim with lua enabled
     1.1 update vim in the computer
     1.2 copy the .vimrc file in ~ folder
     1.3 launch vim
