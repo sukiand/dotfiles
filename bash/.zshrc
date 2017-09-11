@@ -117,8 +117,16 @@ if [ -f "${SSH_ENV}"  ]; then
     fi
 
 # nvm
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+
+
+# for terminal
+if [ -x /usr/local/bin/cowsay -a -x /usr/local/bin/fortune  ]; then
+    # fortune | cowsay -f `ls -1 /usr/local/share/cows/*.cow | sort | head -1`  -n
+    fortune | cowsay -f $(ls /usr/local/share/cows/*.cow | gshuf -n1)
+fi
 
 function bbb() {
     BLOG="blog"
